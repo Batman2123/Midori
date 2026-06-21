@@ -1,7 +1,12 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from src.datasources.news import NewsSource
+from src.agents.analysis import AnalysisAgent
 
 news = NewsSource()
 documents = news.find_documents()
 
-for doc in documents:
-    print(doc.text, doc.date, doc.url)
+agent = AnalysisAgent()
+insights = agent.insights(documents[0])
+print(insights)
