@@ -15,9 +15,10 @@ class NewsSource(DataSource):
     def find_documents(self):
         payload = {
             "action": "getArticles",
-            "keyword": ["Japan", "environment", "carbon", "earthquake"],
+            "sourceUri": ["nhk.or.jp", "japantimes.co.jp", "reuters.com", "asia.nikkei.com"],
+            "keyword": ["Japan", "environment"],
             "keywordOper": "and",
-            "lang": "eng",
+            "lang": ["eng", "jpn"],
             "articlesCount": 10,
             "resultType": "articles",
             "apiKey": os.environ.get("NEWS_API_KEY"),
@@ -25,7 +26,6 @@ class NewsSource(DataSource):
         }
 
         response = requests.post(self.source, json=payload)
-        print(response.status_code, response.text)
 
         data = response.json()
         
